@@ -4,8 +4,9 @@
 
 import customtkinter
 #import tkinter.messagebox
-import tkinter
+#import tkinter
 from PIL import Image
+import os
 
 customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("green")
@@ -20,16 +21,21 @@ class App(customtkinter.CTk):
 
         # configure grid layout
         self.grid_columnconfigure(1, weight=1)
-        self.grid_rowconfigure((0,1), weight=1)
+        self.grid_rowconfigure(0, weight=1)
 
+        # load images
+        image_path = os.path.join(os.path.dirname(os.path.realpath(__file__)),"images")
+        self.logo_image = customtkinter.CTkImage(dark_image=Image.open(os.path.join(image_path, "moz12.png")), 
+                                                 size=(80,80))
+        
         # sidebar frame
         self.sidebar_frame = customtkinter.CTkFrame(self, width=140, corner_radius=0)
-        self.sidebar_frame.grid(row=0, column=0, rowspan=1, sticky="nsew")
+        self.sidebar_frame.grid(row=0, column=0, sticky="nsew")
         self.sidebar_frame.grid_rowconfigure((0,1), weight=1)
-        self.logo = customtkinter.CTkImage(dark_image=Image.open("/home/amir/Downloads/moz.png"), size=(80,80))
-        self.logo.grid(row=0, column=0, padx=20, pady=(20,10))
-        self.logo_label = customtkinter.CTkLabel(self.sidebar_frame, image=self.logo, text="Moz ai")
-
+        #self.logo = customtkinter.CTkImage(dark_image=Image.open("/home/amir/Downloads/moz.png"), size=(80,80))
+        #self.logo.grid(row=0, column=0, padx=20, pady=(20,10))
+        self.logo_label = customtkinter.CTkLabel(self.sidebar_frame, image=self.logo_image, text="Moz ai")
+        
 
 
 if __name__ == "__main__":
